@@ -21,6 +21,9 @@ jobs:
       - name: Install Verilator
         run: sudo apt update && sudo apt install -y verilator
 
+      - name: Install Icarus Verilog
+        run: sudo apt install -y iverilog
+
       - name: Run Lint Check (Verilator)
         run: python validation/lint_check.py
 
