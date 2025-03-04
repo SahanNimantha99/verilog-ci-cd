@@ -1,11 +1,16 @@
-module counter (
-    input clk, reset,
-    output reg [3:0] count
+module up_counter (
+  input clk,   // clock signal
+  input load,  // load enable signal
+  input [3:0] data, // data to be loaded into the counter
+  output reg [3:0] count   // output of the counter
 );
-always @(posedge clk or posedge reset) begin
-    if (reset)
-        count <= 4'b0000;  // ✅ Correct Reset (set to 0)
-    else
-        count <= count + 1; // ✅ Correct Increment (increment by 1)
+
+always @(posedge clk) begin
+  if (load) begin
+    count <= data;
+  end else begin
+    count <= count + 1'b1;
+  end
 end
+
 endmodule

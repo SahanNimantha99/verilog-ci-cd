@@ -1,35 +1,41 @@
-`timescale 1ns/1ps
-module testbench;
-    reg clk, reset;
-    wire [3:0] count;
+module up_counter_tb ();
 
-    // Instantiate the counter module
-    counter uut (
-        .clk(clk),
-        .reset(reset),
-        .count(count)
-    );
+reg clk; // clock signal
+reg load; // load enable signal
+reg [3:0] data; // data to be loaded into the counter
+wire [3:0] count; // output of the counter
 
-    // Clock generation
-    always #5 clk = ~clk;  // Toggle clock every 5ns
+// Instantiate the up_counter module
+up_counter uut (
+  .clk(clk),
+  .load(load),
+  .data(data),
+  .count(count)
+);
 
-    initial begin
-        $dumpfile("testbench.vcd"); // Enable waveform output
-        $dumpvars(0, testbench);
+// Clock generation
+always #5 clk = ~clk;
 
-        // Initialize signals
-        clk = 0;
-        reset = 1;
-        #10; // Keep reset high for 10 time units
+initial begin
+  // Initialize inputs
+  clk = 1'b0;
+  load = 1'b0;
+  data = 4'b0;
 
-        reset = 0;
-        #100; // Let the counter run for 100 time units
+  #10;
 
-        $finish; // End simulation
-    end
+  // Load value into counter
+  load = 1'b1;
+  data = 4'b0001;
+  #10 load = 1'b0;
 
-    // Monitor output
-    always @(posedge clk) begin
-        $display("Time=%0t | Count=%d", $time, count);
-    end
+  // Let counter increment for a few cycles
+  #50;
+
+  // Display result
+  $display("Count: %d", count);
+
+  $finish;
+end
+
 endmodule
