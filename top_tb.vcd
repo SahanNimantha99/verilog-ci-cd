@@ -1,0 +1,47 @@
+$date
+	Mon May  5 11:51:11 2025
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module tb_top $end
+$var reg 1 ! IN1 $end
+$var reg 1 " SEL $end
+$scope module uut $end
+$var wire 1 ! IN1 $end
+$var wire 1 " SEL $end
+$var reg 1 # bit $end
+$scope function func1 $end
+$var reg 1 $ func1 $end
+$var reg 1 % in1 $end
+$var reg 1 & sel $end
+$upscope $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+0&
+0%
+0$
+0#
+0"
+0!
+$end
+#10000
+1#
+1$
+1%
+1!
+#20000
+0#
+0$
+1&
+1"
+#30000
+0%
+0!
+#40000
